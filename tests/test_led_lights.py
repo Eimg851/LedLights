@@ -8,14 +8,9 @@ import pytest
 
 from click.testing import CliRunner
 
-from led_lights import led_lights
-from led_lights import cli
-from led_lights import utils
-
-def test_command_line_interface():
-    ifile = "./data/test_data.txt"
-    N, instructions = utils.parseFile(ifile)
-    assert N is not None
+from led_tester import led_lights
+from led_tester import cli
+from led_tester import utils
 
 @pytest.fixture
 def response():
@@ -23,22 +18,22 @@ def response():
 
     See more at: http://doc.pytest.org/en/latest/fixture.html
     """
-    # import requests
-    # return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
-
-
-def test_content(response):
-    """Sample pytest test function with the pytest fixture as an argument."""
-    # from bs4 import BeautifulSoup
-    # assert 'GitHub' in BeautifulSoup(response.content).title.string
-
+    import requests
+    return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
 
 def test_command_line_interface():
     """Test the CLI."""
     runner = CliRunner()
     result = runner.invoke(cli.main)
     assert result.exit_code == 0
-    assert 'led_lights.cli.main' in result.output
-    help_result = runner.invoke(cli.main, ['--help'])
-    assert help_result.exit_code == 0
-    assert '--help  Show this message and exit.' in help_result.output
+    
+def test_reading_from_file():
+    ifile = "./data/test_data.txt"
+    N, instructions = utils.parseFile(ifile)
+    assert N is not None
+    
+def test_parsing_from_http_file():
+    ifile = "http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt"
+    N, instructions = utils.parseFile(ifile)
+    assert N == 1000
+    assert instructions[1] == 'turn off 660,55 through 986,197'
