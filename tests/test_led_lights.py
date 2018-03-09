@@ -52,3 +52,12 @@ def test_light_grid_http_file():
     N, instructions = utils.parseFile(ifile)
     led_test2 = LEDTester(N)
     assert led_test2.size() == 1000000
+    
+def test_lights_on():
+    ifile = "./data/test_data.txt"
+    N, instructions = utils.parseFile(ifile)
+    led_test = LEDTester(N)
+    assert led_test.lights[0][0] == False
+    led_test.apply('turn on')
+    assert led_test.lights[0][0] == True
+    
