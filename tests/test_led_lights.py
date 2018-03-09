@@ -8,9 +8,9 @@ import pytest
 
 from click.testing import CliRunner
 
-from led_tester import led_lights
 from led_tester import cli
 from led_tester import utils
+from led_tester.lights import LEDTester
 
 @pytest.fixture
 def response():
@@ -39,4 +39,10 @@ def test_parsing_from_http_file():
     N, instructions = utils.parseFile(ifile)
     assert N == 1000
     assert instructions[0] == ['turn', 'off', '660,55', 'through', '986,197']
+    
+def test_light_grid():
+    ifile = "./data/test_data.txt"
+    N, instructions = utils.parseFile(ifile)
+    led_test1 = LEDTester(N)
+    assert led_test1.size() == 100
     
