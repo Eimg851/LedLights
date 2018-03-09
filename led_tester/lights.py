@@ -23,12 +23,41 @@ class LEDTester(object):
                 count += 1
         return count
         
-   # def apply(self, cmd):
-    #    if cmd =='switch':  
-     #       print('switch')
-        #elif cmd == 'turn on':
-        #elif cmd == 'turn off':
+    def apply(self, instructions):
+        cmd = instructions[0]
+        if cmd == 'turn':
+            cmd = instructions[1]
+            start = instructions[2]
+            end = instructions[4]
+        elif cmd == 'switch':
+            start = instructions[1]
+            end = instructions[3]
+            
+        x,y =[],[]
+        x = start.split(',')
+        y = end.split(',')
         
+        start_row = x[0]
+        end_row = y[0]
+        start_col = x[1]
+        end_col = y[1]
+        print(start_row, end_row, start_col, end_col)
+        
+        if cmd == 'switch':
+            for i in range (int(start_row), int(end_row)):
+                for j in range(int(start_col), int(end_col)):
+                    if self.lights[i][j] == True:
+                        self.lights[i][j] = False
+                    else:
+                        self.lights[i][j] = True
+        elif cmd == 'on':
+            for i in range (int(start_row), int(end_row)):
+                for j in range(int(start_col), int(end_col)):
+                    self.lights[i][j] = True
+        elif cmd == 'turn off':
+            for i in range (int(start_row), int(end_row)):
+                for j in range(int(start_col), int(end_col)):
+                    self.lights[i][j] = False
        
     #def count(self):
      #   count = 0
