@@ -101,3 +101,22 @@ def test_turnOff():
     assert led_test.lights[3][4]==False
     assert led_test.lights[4][4]==False
     
+def test_swtich():
+    led_test= LEDTester(10)
+    assert led_test.lights[2][2]==False
+    assert led_test.lights[2][3]==False
+    assert led_test.lights[3][4]==False
+    assert led_test.lights[4][4]==False
+    led_test.switch(led_test.size(), 2, 2, 4, 4)
+    assert led_test.lights[2][2]==True
+    assert led_test.lights[2][3]==True
+    assert led_test.lights[3][4]==True
+    assert led_test.lights[4][4]==True
+    led_test.switch(led_test.size(), 2, 2, 4, 4)
+    assert led_test.lights[2][2]==False
+    assert led_test.lights[2][3]==False
+    assert led_test.lights[3][4]==False
+    assert led_test.lights[4][4]==False
+    
+    
+    
