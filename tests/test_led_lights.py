@@ -63,8 +63,6 @@ def test_apply_lights_on():
     assert led_test.lights[1][1] == False
     
 def test_apply_lights_off():
-    #ifile = "./data/test_data.txt"
-    #N, instructions = utils.parseFile(ifile)
     instructions = [['turn', 'on', '2,2', 'through', '4,4'], ['turn', 'off', '2,2', 'through', '3,3']]
     led_test = LEDTester(10)
     assert led_test.lights[2][2] == False
@@ -118,5 +116,11 @@ def test_swtich():
     assert led_test.lights[3][4]==False
     assert led_test.lights[4][4]==False
     
+def test_count():
+    led_test= LEDTester(10)
+    assert led_test.count() == 0
+    led_test.turnOn(led_test.size(), 2, 2, 4, 4)
+    assert led_test.count() == 9
     
+       
     
