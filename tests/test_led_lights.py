@@ -30,10 +30,13 @@ def test_command_line_interface():
 def test_reading_from_file():
     ifile = "./data/test_data.txt"
     N, instructions = utils.parseFile(ifile)
-    assert N is not None
+    print(instructions)
+    assert N == 10
+    assert instructions[0] == ['turn', 'on', '0,0', 'through', '9,9']
     
 def test_parsing_from_http_file():
     ifile = "http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt"
     N, instructions = utils.parseFile(ifile)
     assert N == 1000
-    assert instructions[1] == 'turn off 660,55 through 986,197'
+    assert instructions[0] == ['turn', 'off', '660,55', 'through', '986,197']
+    
