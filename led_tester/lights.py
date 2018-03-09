@@ -33,48 +33,39 @@ class LEDTester(object):
             start = instructions[1]
             end = instructions[3]
             
-        x,y =[],[]
         x = start.split(',')
         y = end.split(',')
         
-        start_row = x[0]
-        end_row = y[0]
-        start_col = x[1]
-        end_col = y[1]
-        print(start_row, end_row, start_col, end_col)
+        x1 = x[0]
+        x2 = y[0]
+        y1 = x[1]
+        y2 = y[1]
         
-        if cmd == 'switch':
-            for i in range (int(start_row), int(end_row)):
-                for j in range(int(start_col), int(end_col)):
-                    if self.lights[i][j] == True:
-                        self.lights[i][j] = False
-                    else:
-                        self.lights[i][j] = True
-        elif cmd == 'on':
-            for i in range (int(start_row), int(end_row)):
-                for j in range(int(start_col), int(end_col)):
-                    self.lights[i][j] = True
-        elif cmd == 'turn off':
-            for i in range (int(start_row), int(end_row)):
-                for j in range(int(start_col), int(end_col)):
+        if cmd == 'on':
+            self.turnOn(self.size(), x1, y1, x2, y2)
+        elif cmd == 'off':
+            for i in range (int(x1), int(x2)):
+                for j in range(int(y1), int(y2)):
                     self.lights[i][j] = False
+        else:
+            print('Command not recognised')
        
-    #def count(self):
-     #   count = 0
-      #  for val in self:
-       #     if val == "True":
-        #        print('Found light on')
-         #   count += 1
-        #return count
+    def count(self):
+        count = 0
+        for val in self:
+            if val == "True":
+                print('Found light on')
+            count += 1
+        return count
     
-   # def turnOn(self):
-    #    for val in self:
-     #       if val == 'False':
-     #           val = ['True']
-      #      print('Light turned on')
+    def turnOn(self, N, x1, y1, x2, y2):
+        for i in range (int(x1), int(x2)+1):
+                for j in range(int(y1), int(y2)+1):
+                    self.lights[i][j] = True
+        print('Lights turned on')
                 
-    #def turnOff(self):
-     #   for val in self:
-      #      if val == 'True':
-       #         val = ['False']
-        #    print('Light turned off')
+    def turnOff(self, N, x1, y1, x2, y2):
+        for i in range (int(x1), int(x2)+1):
+                for j in range(int(y1), int(y2)+1):
+                    self.lights[i][j] = False
+        print('Lights turned off')
