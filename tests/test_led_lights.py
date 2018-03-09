@@ -40,9 +40,14 @@ def test_parsing_from_http_file():
     assert N == 1000
     assert instructions[0] == ['turn', 'off', '660,55', 'through', '986,197']
     
-def test_light_grid():
+def test_light_grid_local_file():
     ifile = "./data/test_data.txt"
     N, instructions = utils.parseFile(ifile)
     led_test1 = LEDTester(N)
-    assert led_test1.size() == 100
+    assert led_test1.size(N) == 100
     
+def test_light_grid_http_file():
+    ifile = "http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt"
+    N, instructions = utils.parseFile(ifile)
+    led_test2 = LEDTester(N)
+    assert led_test2.size(N) == 1000000
