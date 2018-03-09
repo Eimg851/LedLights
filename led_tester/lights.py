@@ -35,18 +35,14 @@ class LEDTester(object):
             
         x = start.split(',')
         y = end.split(',')
-        
-        x1 = x[0]
-        x2 = y[0]
-        y1 = x[1]
-        y2 = y[1]
+        x1, x2, y1, y2 = x[0], y[0], x[1], y[1]
         
         if cmd == 'on':
             self.turnOn(self.size(), x1, y1, x2, y2)
         elif cmd == 'off':
-            for i in range (int(x1), int(x2)):
-                for j in range(int(y1), int(y2)):
-                    self.lights[i][j] = False
+            self.turnOff(self.size(), x1, y1, x2, y2)
+        elif cmd =='switch':
+            self.switch(self.size(), x1, y1, x2, y2)
         else:
             print('Command not recognised')
        

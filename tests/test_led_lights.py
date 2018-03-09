@@ -53,7 +53,7 @@ def test_light_grid_http_file():
     led_test2 = LEDTester(N)
     assert led_test2.size() == 1000000
     
-def test_lights_on():
+def test_apply_lights_on():
     instructions = [['turn', 'on', '2,2', 'through', '4,4']]
     led_test = LEDTester(10)
     assert led_test.lights[2][2] == False
@@ -62,7 +62,7 @@ def test_lights_on():
     assert led_test.lights[2][2] == True
     assert led_test.lights[1][1] == False
     
-def test_lights_off():
+def test_apply_lights_off():
     #ifile = "./data/test_data.txt"
     #N, instructions = utils.parseFile(ifile)
     instructions = [['turn', 'on', '2,2', 'through', '4,4'], ['turn', 'off', '2,2', 'through', '3,3']]
@@ -73,4 +73,31 @@ def test_lights_off():
     assert led_test.lights[2][2] == False
     assert led_test.lights[4][4] == True
     
+def test_turnOn():
+    led_test= LEDTester(10)
+    assert led_test.lights[2][2] == False
+    assert led_test.lights[2][3]==False
+    assert led_test.lights[3][4]==False
+    assert led_test.lights[4][4]==False
+    led_test.turnOn(led_test.size(), 2, 2, 4, 4)
+    assert led_test.lights[2][2] ==True
+    assert led_test.lights[2][3]==True
+    assert led_test.lights[3][4]==True
+    assert led_test.lights[4][4]==True
+    assert led_test.lights[1][1] == False
+    
+def test_turnOff():
+    led_test= LEDTester(10)
+    assert led_test.lights[2][2] == False
+    led_test.turnOn(led_test.size(), 2, 2, 4, 4)
+    assert led_test.lights[2][2]==True
+    assert led_test.lights[2][3]==True
+    assert led_test.lights[3][4]==True
+    assert led_test.lights[4][4]==True
+    assert led_test.lights[1][1]==False
+    led_test.turnOff(led_test.size(), 2, 2, 4, 4)
+    assert led_test.lights[2][2]==False
+    assert led_test.lights[2][3]==False
+    assert led_test.lights[3][4]==False
+    assert led_test.lights[4][4]==False
     
