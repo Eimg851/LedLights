@@ -121,6 +121,8 @@ def test_count():
     assert led_test.count() == 0
     led_test.turnOn(led_test.size(), 2, 2, 4, 4)
     assert led_test.count() == 9
+    led_test.turnOff(led_test.size(), 2, 2, 4, 4)
+    assert led_test.count() == 0
     
        
     
