@@ -14,8 +14,9 @@ def main(input=None):
     print("input", input) 
     N, instructions = utils.parseFile(input)
     ledTester = LEDTester(N)
-    for instruction in instructions:
-        ledTester.apply(instruction)
+    for instruction in instructions: 
+        parsed_instruction = utils.find_matches(instruction)
+        ledTester.apply(parsed_instruction)
     print('#occupied: ', ledTester.count()) 
     return 0
 

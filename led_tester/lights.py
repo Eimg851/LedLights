@@ -25,6 +25,9 @@ class LEDTester(object):
         return count
         
     def apply(self, instructions):
+        if instructions == None:
+            return
+        instructions = [s.strip() for s in instructions]
         cmd = instructions[0]
         if cmd == 'turn':
             cmd = instructions[1]
@@ -33,7 +36,10 @@ class LEDTester(object):
         elif cmd == 'switch':
             start = instructions[1]
             end = instructions[3]
-            
+        else:
+            print('Command not recognised')
+            return
+        
         x = start.split(',')
         y = end.split(',')
         x1, y1, x2, y2 = self.assign_xy_values(x,y)
@@ -48,35 +54,38 @@ class LEDTester(object):
             print('Command not recognised')
             
     def assign_xy_values(self, x, y):
-
-        size = math.sqrt(self.size())
-        if x[0] >= 0 and x[0] <= size:
-            a= x[0]
-        elif x[0] < 0:
-            a = 0 
-        elif x[0] > size:
-            a = size
+        x1 = int(x[0])
+        x2 = int(y[0])
+        y1 = int(x[1])
+        y2 = int(y[1])
+        size = int(math.sqrt(self.size()))
+        if x1 >= 0 and x1 <= size:
+            a = x[0]
+        elif x1 < 0:
+            a = str(0)
+        elif x1 > size:
+            a = str(size-1)
             
-        if x[1] >= 0 and x[1] <= size:
+        if y1 >= 0 and y1 <= size:
             b =x[1]
-        elif x[1] < 0:
-            b = 0 
-        elif x[1] > size:
-            b = size
+        elif y1 < 0:
+            b = str(0)
+        elif y1 > size:
+            b = str(size-1)
             
-        if y[0] >= 0 and y[0] <= size:
+        if x2 >= 0 and x2 <= size:
             c =y[0]
-        elif y[0] < 0:
-            c = 0 
-        elif y[0] > size:
-            c = size
+        elif x2 < 0:
+            c = str(0) 
+        elif x2 > size:
+            c = str(size-1)
             
-        if y[1] >= 0 and y[1] <= size:
+        if y2 >= 0 and y2 <= size:
             d =y[1]
-        elif y[1] < 0:
-            d = 0 
-        elif y[1] > size:
-            d = size
+        elif y2 < 0:
+            d = str(0)
+        elif y2 > size:
+            d = str(size-1)
             
         return a, b, c, d   
        
@@ -85,7 +94,6 @@ class LEDTester(object):
         for i in range(0, len(self.lights)):
             for j in range (0,len(self.lights[i])):
                 if self.lights[i][j] == True:
-                    print('Found light on')
                     count += 1
         return count
     
