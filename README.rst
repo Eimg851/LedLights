@@ -17,7 +17,7 @@ led_lights
 
 
 COMP30670 Assignment 3 - Program to monitor / control lights in science building
-** Assignment description
+-------
 The Science Centre is installing a new display board which is constructed from LED
 lights.
 The board is a square grid of LEDs which we control by sending commands to the unit
